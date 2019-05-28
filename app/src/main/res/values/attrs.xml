@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="HistogramView">
+        <attr name="rowTitleColor" format="color"/>
+        <attr name="rowTitleSize" format="dimension"/>
+        <attr name="rowTitlePadding" format="dimension"/>
+
+        <attr name="columnTitleColor" format="color"/>
+        <attr name="columnTitleSize" format="dimension"/>
+        <attr name="columnTitlePadding" format="dimension"/>
+
+        <attr name="baseLineColor" format="color"/>
+        <attr name="selectedColor" format="color"/>
+
+        <attr name="baseLineWidth" format="color"/>
+        <attr name="columnWidth" format="dimension"/>
+    </declare-styleable>
+
+</resources>

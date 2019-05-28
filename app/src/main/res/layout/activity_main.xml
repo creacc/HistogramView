@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.creacc.histogramviewdemo.histogram.HistogramView
+        android:id="@+id/histogram_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:rowTitlePadding="10dp"
+        app:rowTitleColor="#5b5b5b"
+        app:rowTitleSize="15sp"
+        app:columnTitlePadding="10dp"
+        app:columnTitleColor="#5b5b5b"
+        app:columnTitleSize="12sp"
+        app:selectedColor="#EEEEEE"
+        app:baseLineColor="#666666"/>
+
+</android.support.constraint.ConstraintLayout>
