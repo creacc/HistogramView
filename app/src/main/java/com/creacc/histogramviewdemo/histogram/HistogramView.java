@@ -273,7 +273,7 @@ public class HistogramView extends View {
     }
 
     private void drawItem(Canvas canvas) {
-        float itemLeft = (mColumnWidth - (mColumnItemWidth * mColumnItemCount + mColumnItemPadding * (mColumnItemCount - 1))) / 2;
+        float itemLeft = (mColumnWidth - (mColumnItemWidth * mColumnItemCount + mColumnItemPadding * (mColumnItemCount - 1))) / 2 + mColumnItemWidth / 2;
         float itemBottom = mViewHeight - mTableBottomMargin - mColumnItemPadding / 2;
 
         for (int i = 0; i < mColumnCount; i++) {
