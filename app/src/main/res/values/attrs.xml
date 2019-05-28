@@ -14,7 +14,8 @@
         <attr name="selectedColor" format="color"/>
 
         <attr name="baseLineWidth" format="color"/>
-        <attr name="columnWidth" format="dimension"/>
+        <attr name="columnItemWidth" format="dimension"/>
+        <attr name="columnItemPadding" format="dimension"/>
     </declare-styleable>
 
 </resources>

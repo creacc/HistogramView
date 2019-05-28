@@ -47,11 +47,10 @@ public class HistogramView extends View {
     private int mRowCount;
     private int mColumnCount;
 
-    private float mColumnValuePadding = 10;
-    private float mColumnValueWidth = 10;
-
-    private int mColumnValueCount = 3;
-    private int[] mValueColors;
+    private float mColumnItemPadding;
+    private float mColumnItemWidth;
+    private int mColumnItemCount;
+    private int[] mItemColors;
 
     private int mRowTitleColor;
     private float mRowTitleSize;
@@ -111,6 +110,7 @@ public class HistogramView extends View {
                     return "测试文本";
                 }
             });
+            mSelectPosition.set(1, 3);
         }
     }
 
@@ -133,7 +133,8 @@ public class HistogramView extends View {
             mSelectedColor = typedArray.getColor(R.styleable.HistogramView_selectedColor, Color.GRAY);
 
             mBaseLineWidth = typedArray.getDimensionPixelSize(R.styleable.HistogramView_baseLineWidth, 1);
-            mColumnValueWidth = typedArray.getDimensionPixelSize(R.styleable.HistogramView_columnWidth, 10);
+            mColumnItemWidth = typedArray.getDimensionPixelSize(R.styleable.HistogramView_columnItemWidth, 10);
+            mColumnItemPadding = typedArray.getDimensionPixelSize(R.styleable.HistogramView_columnItemPadding, 10);
         } finally {
             typedArray.recycle();
         }
@@ -162,7 +163,7 @@ public class HistogramView extends View {
         mTableBottomMargin = textHeight + mColumnTitlePadding * 2;
 
         mColumnPaint = new Paint();
-        mColumnPaint.setStrokeWidth(mColumnValueWidth);
+        mColumnPaint.setStrokeWidth(mColumnItemWidth);
         mColumnPaint.setStrokeJoin(Paint.Join.ROUND);
         mColumnPaint.setStrokeCap(Paint.Cap.ROUND);
         mColumnPaint.setAntiAlias(true);
@@ -175,14 +176,14 @@ public class HistogramView extends View {
         mHistogramAdapter = adapter;
 
         mColumnCount = adapter.getColumnGroupCount();
-        int columnItemCount = adapter.getColumnItemCount();
+        mColumnItemCount = adapter.getColumnItemCount();
         mColumnGroups = new ArrayList<>(mColumnCount);
-        mValueColors =  new int[mColumnCount];
+        mItemColors =  new int[mColumnCount];
         for (int i = 0; i < mColumnCount; i++) {
-            float[] values = new float[columnItemCount];
-            for (int itemIndex = 0; itemIndex < columnItemCount; itemIndex++) {
+            float[] values = new float[mColumnItemCount];
+            for (int itemIndex = 0; itemIndex < mColumnItemCount; itemIndex++) {
                 if (i == 0) {
-                    mValueColors[itemIndex] = adapter.getColumnColor(itemIndex);
+                    mItemColors[itemIndex] = adapter.getColumnColor(itemIndex);
                 }
                 values[itemIndex] = adapter.getColumnValue(i, itemIndex);
             }
@@ -224,7 +225,7 @@ public class HistogramView extends View {
         drawSelectedItem(canvas);
         drawTable(canvas);
         drawTitle(canvas);
-        drawValue(canvas);
+        drawItem(canvas);
     }
 
     private void prepare() {
@@ -271,17 +272,17 @@ public class HistogramView extends View {
         }
     }
 
-    private void drawValue(Canvas canvas) {
-        float valueLeft = (mColumnWidth - (mColumnValueWidth * mColumnValueCount + mColumnValuePadding * (mColumnValueCount - 1))) / 2;
-        float valueBottom = mViewHeight - mTableBottomMargin - mColumnValuePadding / 2;
+    private void drawItem(Canvas canvas) {
+        float itemLeft = (mColumnWidth - (mColumnItemWidth * mColumnItemCount + mColumnItemPadding * (mColumnItemCount - 1))) / 2;
+        float itemBottom = mViewHeight - mTableBottomMargin - mColumnItemPadding / 2;
 
         for (int i = 0; i < mColumnCount; i++) {
             ColumnGroup columnGroup = mColumnGroups.get(i);
             float[] columnValues = columnGroup.getColumnValues();
-            for (int valueIndex = 0; valueIndex < mColumnValueCount; valueIndex++) {
-                mColumnPaint.setColor(mValueColors[valueIndex]);
-                float valueRenderX = mTableLeftMargin + valueLeft + (mColumnValueWidth + mColumnValuePadding) * valueIndex + mColumnWidth * i;
-                canvas.drawLine(valueRenderX, valueBottom, valueRenderX, valueBottom - (valueBottom - mRowHeight - mColumnValuePadding) * columnValues[valueIndex], mColumnPaint);
+            for (int itemIndex = 0; itemIndex < mColumnItemCount; itemIndex++) {
+                mColumnPaint.setColor(mItemColors[itemIndex]);
+                float itemRenderX = mTableLeftMargin + itemLeft + (mColumnItemWidth + mColumnItemPadding) * itemIndex + mColumnWidth * i;
+                canvas.drawLine(itemRenderX, itemBottom, itemRenderX, itemBottom - (itemBottom - mRowHeight - mColumnItemPadding) * columnValues[itemIndex], mColumnPaint);
             }
         }
     }
