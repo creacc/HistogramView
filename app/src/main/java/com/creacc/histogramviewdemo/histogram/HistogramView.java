@@ -16,6 +16,7 @@ import com.creacc.histogramviewdemo.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class HistogramView extends View {
 
@@ -74,10 +75,14 @@ public class HistogramView extends View {
         initPaints();
         if (isInEditMode()) {
             // for test
+            final int testColumnGroupCount = 6;
+            final int testColumnItemCount = 3;
+            final int testRowCount = 6;
+            final Random random = new Random();
             setAdapter(new HistogramAdapter() {
                 @Override
                 public int getColumnGroupCount() {
-                    return 6;
+                    return testColumnGroupCount;
                 }
 
                 @Override
@@ -87,22 +92,22 @@ public class HistogramView extends View {
 
                 @Override
                 public int getColumnItemCount() {
-                    return 3;
+                    return testColumnItemCount;
                 }
 
                 @Override
                 public int getColumnColor(int itemPosition) {
-                    return Color.parseColor("#338899");
+                    return Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255));
                 }
 
                 @Override
                 public float getColumnValue(int groupPosition, int itemPosition) {
-                    return 0.6f;
+                    return random.nextInt(100) / 100f;
                 }
 
                 @Override
                 public int getRowCount() {
-                    return 6;
+                    return testRowCount;
                 }
 
                 @Override
@@ -110,7 +115,7 @@ public class HistogramView extends View {
                     return "测试文本";
                 }
             });
-            mSelectPosition.set(1, 3);
+            mSelectPosition.set(random.nextInt(testColumnGroupCount - 1), random.nextInt(testRowCount - 1));
         }
     }
 

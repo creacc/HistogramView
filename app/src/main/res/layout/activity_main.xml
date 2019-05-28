@@ -12,7 +12,7 @@
         android:layout_height="200dp"
         app:rowTitlePadding="10dp"
         app:rowTitleColor="#5b5b5b"
-        app:rowTitleSize="15sp"
+        app:rowTitleSize="12sp"
         app:columnTitlePadding="10dp"
         app:columnTitleColor="#5b5b5b"
         app:columnTitleSize="12sp"
