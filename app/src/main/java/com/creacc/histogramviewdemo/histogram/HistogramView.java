@@ -271,7 +271,7 @@ public class HistogramView extends View {
             canvas.drawText(mRowTitles.get(i), mRowTitlePadding, mRowHeight * (i + 1) + mRowTextOffset, mRowTitlePaint);
         }
 
-        float columnTitleRenderY = mViewHeight - mTableBottomMargin / 2 - mColumnTitlePadding / 2 + mColumnTextOffset;
+        float columnTitleRenderY = mViewHeight - mTableBottomMargin / 2 + mColumnTextOffset;
         for (int i = 0; i < mColumnCount; i++) {
             canvas.drawText(mColumnGroups.get(i).getTitle(), mTableLeftMargin + mColumnWidth / 2 + (mColumnWidth * i), columnTitleRenderY, mColumnTitlePaint);
         }
